@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./backend  # Путь к директории с Dockerfile
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app  # Монтирование кода приложения
+    ports:
+      - "8000:8000"  # Прокидывание порта
+    environment:
+      - DATABASE_URL=mariadb://db_user:db_pass@db:3306/hikes_db
+    depends_on:
+      - db
+    command: >
+      sh -c "python manage.py migrate &&
+              python manage.py runserver 0.0.0.0:8000"
+
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hikes_db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_pass
+    volumes:
+      - db_data:/var/lib/mysql  # Хранение данных базы данных
+
+volumes:
+  db_data:
