@@ -8,7 +8,7 @@ My Hikes App — это приложение для планирования и 
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/yourusername/my_hikes_app.git
+   git clone https://github.com/yourusername/my_hikes_app](https://github.com/Konstantin-Lanin-it/my_hikes_app.git
    cd my_hikes_app
 
 2. Установите зависимости:
